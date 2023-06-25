@@ -1,8 +1,13 @@
 const Usuario = require('../models/Usuario');
+const Permissao = require('../models/Permissao');
 module.exports={
 	async store(req,res){
-		const {nome,email,senha} = req.body; 
-		const usuario = await Usuario.create({nome,email,senha});
+		const {nome,email,senha} = req.body;
+		const permissao = await Permissao.findByPk(1);
+		if(!permissao){
+			return res.status(400).json({error: "Permissão não encontrada"});
+		}
+		const usuario = await Usuario.create({nome,email,senha,permissoes:permissao.nome});
 		return res.json(usuario);
 	},
 	async findAll(req,res){

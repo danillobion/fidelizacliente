@@ -6,6 +6,7 @@ class Usuario extends Model{
 			email: DataTypes.STRING,
 			senha: DataTypes.STRING,
 			token: DataTypes.STRING,
+			permissoes: DataTypes.STRING,
 		},{
 			sequelize:connection
 		})
